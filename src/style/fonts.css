@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'RobotoMono-Bold';
-  src: url(../assets/fonts/RobotoMono-Bold.ttf);
+  src: url('./assets/fonts/RobotoMono-Bold.ttf');
   font-display: swap;
 }
 .rmB {
@@ -8,7 +8,7 @@
 }
 @font-face {
   font-family: 'RobotoMono-BoldItalic';
-  src: url(../assets/fonts/RobotoMono-BoldItalic.ttf);
+  src: url('./assets/fonts/RobotoMono-BoldItalic.ttf');
   font-display: swap;
 }
 .rmBI {
@@ -16,7 +16,7 @@
 }
 @font-face {
   font-family: 'RobotoMono-Italic';
-  src: url(../assets/fonts/RobotoMono-Italic.ttf);
+  src: url('./assets/fonts/RobotoMono-Italic.ttf');
   font-display: swap;
 }
 .rmI {
@@ -24,7 +24,7 @@
 }
 @font-face {
   font-family: 'RobotoMono-Light';
-  src: url(../assets/fonts/RobotoMono-Light.ttf);
+  src: url('./assets/fonts/RobotoMono-Light.ttf');
   font-display: swap;
 }
 .rmL {
@@ -32,7 +32,7 @@
 }
 @font-face {
   font-family: 'RobotoMono-LightItalic';
-  src: url(../assets/fonts/RobotoMono-LightItalic.ttf);
+  src: url('./assets/fonts/RobotoMono-LightItalic.ttf');
   font-display: swap;
 }
 .rmLI {
@@ -40,7 +40,7 @@
 }
 @font-face {
   font-family: 'RobotoMono-Medium';
-  src: url(../assets/fonts/RobotoMono-Medium.ttf);
+  src: url('./assets/fonts/RobotoMono-Medium.ttf');
   font-display: swap;
 }
 .rmM {
@@ -48,7 +48,7 @@
 }
 @font-face {
   font-family: 'RobotoMono-MediumItalic';
-  src: url(../assets/fonts/RobotoMono-MediumItalic.ttf);
+  src: url('./assets/fonts/RobotoMono-MediumItalic.ttf');
   font-display: swap;
 }
 .rmMI {
@@ -56,7 +56,7 @@
 }
 @font-face {
   font-family: 'RobotoMono-Regular';
-  src: url(../assets/fonts/RobotoMono-Regular.ttf);
+  src: url('./assets/fonts/RobotoMono-Regular.ttf');
   font-display: swap;
 }
 .rmR {
@@ -64,7 +64,7 @@
 }
 @font-face {
   font-family: 'RobotoMono-Thin';
-  src: url(../assets/fonts/RobotoMono-Thin.ttf);
+  src: url('./assets/fonts/RobotoMono-Thin.ttf');
   font-display: swap;
 }
 .rmT {
@@ -72,7 +72,7 @@
 }
 @font-face {
   font-family: 'RobotoMono-ThinItalic';
-  src: url(../assets/fonts/RobotoMono-ThinItalic.ttf);
+  src: url('./assets/fonts/RobotoMono-ThinItalic.ttf');
   font-display: swap;
 }
 .rmTI {

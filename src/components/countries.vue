@@ -1,5 +1,5 @@
 <template lang="pug">
-  section.countr-container.card
+  section.country-container.card
     .card-overlay.card-overlay-depth-1
     .item-container
       h2.rmR Stats
@@ -11,11 +11,12 @@
       .item-grid
         .filter.card
           label.rmR.h3(for="search-filter") Filter by search
-          input#search-filter(type="text")
+          input#search-filter(type="text" v-model="value" @keyup="filterBySearch({{ value }})")
           .card-overlay.card-overlay-depth-2
         .filter.card
           h3.rmR Filter by letter
           .country-initial-filter
+          .card-overlay.card-overlay-depth-2
       .active-filters.card.hidden
         .card-overlay.card-overlay-depth-2
     section(v-if="errored")
@@ -24,87 +25,34 @@
       .loading(v-if="loading")
         h2 Loading...
       .country-grid(v-else)
-        figure.country(v-for="country in allCountries" v-if="!vinyl.fields.Såld")
+        figure.country(v-for="country in allCountries")
           img(:src="country.flag" :alt="country.name" loading="lazy")
           figcaption.rmR {{ country.name }}
 </template>
 
 <script lang="ts">
 import json from '../assets/data/countries.json';
+import { Country } from '../types/index';
 export default {
   name: 'countries',
-  data() {
+  data(): Object {
     return {
       allCountries: json,
       elementsToShow: [],
       elementsToHide: [],
-      countryInitials: Array.prototype.slice
-        .call(this.allCountries)
-        .map(letter => letter.lastChild.textContent.substring(0, 1))
-        .filter((v, i, a) => a.indexOf(v) === i) //Removes duplicates.
-        .sort(), //Sorts countryInitials in alphabetical order
-      loading: true,
+      countryInitials: null, //Sorts countryInitials in alphabetical order
+      loading: false,
       errored: false,
       textToggle: false
     };
   },
   methods: {
-    createOverlayEl(element: HTMLElement, overlayDepth: string) {
-      const overlayEl = document.createElement('div');
-      overlayEl.className = 'card-overlay ' + overlayDepth;
-      element.appendChild(overlayEl);
-    },
-    createContainerElement(
-      element: HTMLElement,
-      name: string,
-      insertInto: HTMLElement
-    ) {
-      element.classList.add('item-container');
-
-      const headerEl = document.createElement('h2');
-      headerEl.className = 'rmR';
-      headerEl.textContent = name;
-      element.appendChild(headerEl);
-
-      const itemGridEl = document.createElement('div');
-      itemGridEl.className = 'item-grid';
-      element.appendChild(itemGridEl);
-
-      if (insertInto) insertInto.appendChild(element);
-    },
-    createFilterElement(
-      element: HTMLElement | HTMLElement[],
-      name: string,
-      insertInto: HTMLElement
-    ) {
-      const filterWrapper = document.createElement('div');
-      filterWrapper.className = 'filter card';
-
-      if (Array.isArray(element)) {
-        element.forEach(function(e) {
-          console.log(e.tagName);
-          if (e.tagName === 'LABEL') {
-            e.textContent = name;
-          }
-          filterWrapper.appendChild(e);
-        });
-      } else {
-        const headerEl = document.createElement('h3');
-        headerEl.className = 'rmR';
-        headerEl.textContent = name;
-        filterWrapper.appendChild(headerEl);
-        filterWrapper.appendChild(element);
-      }
-
-      this.createOverlayEl(filterWrapper, 'card-overlay-depth-2');
-      insertInto?.lastChild?.appendChild(filterWrapper);
-    },
     filterElements(showArray: HTMLElement[], hideArray: HTMLElement[]) {
       hideArray.forEach(e => e.classList.add('hidden'));
       showArray.forEach(e => e.classList.remove('hidden'));
     },
-    filterBySearch(searchValue: string) {
-      let searchFilter = searchValue.toUpperCase();
+    filterBySearch(searchFilter) {
+      searchFilter = searchFilter.toUpperCase();
       this.allCountries.forEach(function(country) {
         const countryEl = <HTMLElement>country;
         const countryName = countryEl?.lastChild?.textContent?.toUpperCase();
@@ -120,107 +68,27 @@ export default {
         }
 
         if (!countryName?.includes(searchFilter)) {
-          if (!this.this.elementsToHide.includes(countryEl)) {
-            this.this.elementsToHide.push(countryEl);
+          if (!this.elementsToHide.includes(countryEl)) {
+            this.elementsToHide.push(countryEl);
           }
         } else {
           const countryToRemove = this.elementsToHide.indexOf(countryEl);
-          if (this.this.elementsToHide.includes(countryEl)) {
-            this.this.elementsToHide.splice(countryToRemove, 1);
+          if (this.elementsToHide.includes(countryEl)) {
+            this.elementsToHide.splice(countryToRemove, 1);
           }
         }
       });
-      this.filterElements(this.elementsToShow, this.this.elementsToHide);
+      this.filterElements(this.elementsToShow, this.elementsToHide);
     }
   },
   async mounted() {
-    const countryContainerEl = document.createElement('section');
-    countryContainerEl.className = 'country-container card';
-    this.createOverlayEl(countryContainerEl, 'card-overlay-depth-1');
-
-    const countryGridEl = document.createElement('div');
-    countryGridEl.className = 'country-grid';
-
-    //Country Elements
-    interface JsonCountryData {
-      name: string;
-      flag: string;
-    }
-
-    this.allCountries.forEach(function(country: JsonCountryData) {
-      const { name, flag } = country;
-
-      const countryEl = document.createElement('figure');
-      countryEl.className = 'country';
-
-      const countryImage = document.createElement('img');
-      countryImage.src = flag;
-      countryImage.alt = name;
-      countryImage.setAttribute('loading', 'lazy');
-      countryEl.appendChild(countryImage);
-
-      const countryName = document.createElement('figcaption');
-      countryName.className = 'rmR';
-      countryName.textContent = name;
-      countryEl.appendChild(countryName);
-
-      countryGridEl.appendChild(countryEl);
-    });
-
-    //Filter Elements
-    const filterContainerEl = document.createElement('div');
-    this.createContainerElement(
-      filterContainerEl,
-      'Filter',
-      countryContainerEl
-    );
-
-    const activeFiltersEl = document.createElement('div');
-    activeFiltersEl.className = 'active-filters card hidden';
-    this.createOverlayEl(activeFiltersEl, 'card-overlay-depth-2');
-
-    const allCountries: NodeList = countryGridEl.childNodes;
-    let activeFiltersArr: string[];
-    let elementsToShow: HTMLElement[];
-    let elementsToHide: HTMLElement[];
-
-    const searchFilterEl = document.createElement('input');
-    searchFilterEl.id = 'search-filter';
-    searchFilterEl.type = 'text';
-
-    const searchFilterLabelEl = document.createElement('label');
-    searchFilterLabelEl.setAttribute('for', 'search-filter');
-    searchFilterLabelEl.className = 'rmR h3';
-
-    searchFilterEl.addEventListener('keyup', () => {
-      let searchFilter = searchFilterEl.value.toUpperCase();
-      allCountries.forEach(function(country) {
-        const countryEl = <HTMLElement>country;
-        const countryName = countryEl?.lastChild?.textContent?.toUpperCase();
-        if (countryName?.includes(searchFilter)) {
-          if (!elementsToShow.includes(countryEl)) {
-            elementsToShow.push(countryEl);
-          }
-        } else {
-          const countryToRemove = elementsToShow.indexOf(countryEl);
-          if (elementsToShow.includes(countryEl)) {
-            elementsToShow.splice(countryToRemove, 1);
-          }
-        }
-
-        if (!countryName?.includes(searchFilter)) {
-          if (!elementsToHide.includes(countryEl)) {
-            elementsToHide.push(countryEl);
-          }
-        } else {
-          const countryToRemove = elementsToHide.indexOf(countryEl);
-          if (elementsToHide.includes(countryEl)) {
-            elementsToHide.splice(countryToRemove, 1);
-          }
-        }
-      });
-      this.filterElements(elementsToShow, elementsToHide);
-    });
+    this.countryInitials = Array.prototype.slice
+      .call(this.allCountries)
+      .map(letter => letter.lastChild.textContent.substring(0, 1))
+      .filter((v, i, a) => a.indexOf(v) === i) //Removes duplicates.
+      .sort();
+    /*
+    /*
     this.createFilterElement(
       [searchFilterLabelEl, searchFilterEl],
       'Filter by search',
@@ -235,8 +103,8 @@ export default {
       .map(letter => letter.lastChild.textContent.substring(0, 1))
       .filter((v, i, a) => a.indexOf(v) === i) //Removes duplicates.
       .sort(); //Sorts countryInitials in alphabetical order
-
-    countryInitials.forEach(function(letter) {
+*/
+    /*countryInitials.forEach(function(letter) {
       const letterEl = document.createElement('a');
       letterEl.className = 'filter-by-letter rmR';
       letterEl.setAttribute('role', 'button');
@@ -366,13 +234,13 @@ export default {
     countryContainerEl.appendChild(filterContainerEl);
     countryContainerEl.appendChild(countryGridEl);
     document?.querySelector('main')?.appendChild(countryContainerEl);
+    */
     //.then(response => (this.vinyls = response.data.records))
     //.catch(() => (this.errored = true))
-    //.finally(() => (this.loading = false));
   }
 };
 </script>
 
-<style lang="scss">
-@import '../scss/countries.scss';
+<style lang="scss" scoped>
+@import '../style/countries.scss';
 </style>

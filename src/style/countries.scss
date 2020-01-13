@@ -87,8 +87,9 @@ $active-filter-border-color: #d7d7d7;
     margin: 10px;
     text-align: center;
     img {
-      max-width: 90%;
-      max-height: 90px;
+      width: 90%;
+      height: 90px;
+      object-fit: contain;
     }
     figcaption {
       font-size: small;
