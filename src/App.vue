@@ -1,10 +1,11 @@
 <template lang="pug">
-  app
+  #app
     main.card
+      router-view
 </template>
 
 <style lang="scss">
-@use '@/scss/main';
+@import '@/scss/main', '@/scss/light';
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
