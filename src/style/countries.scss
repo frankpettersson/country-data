@@ -1,96 +1,18 @@
 $active-filter-background-color: #f8f9f8;
 $active-filter-border-color: #d7d7d7;
-$primary: #fafafa;
-$secondary: #d8d7d2;
-$white: #fff;
-$gray: #9b9b9b;
-.form__group {
-  position: relative;
-  padding: 15px 0 0;
-  margin-top: 10px;
-  width: 50%;
-}
-
-.form__field {
-  font-family: inherit;
-  width: 100%;
-  border: 0;
-  border-bottom: 2px solid $gray;
-  outline: 0;
-  font-size: 1.3rem;
-  color: $white;
-  padding: 7px 0;
-  background: transparent;
-  transition: border-color 0.2s;
-
-  &::placeholder {
-    color: transparent;
-  }
-
-  &:placeholder-shown ~ .form__label {
-    font-size: 1.3rem;
-    cursor: text;
-    top: 20px;
-  }
-}
-
-.form__label {
-  position: absolute;
-  top: 0;
-  display: block;
-  transition: 0.2s;
-  font-size: 1rem;
-  color: $gray;
-}
-
-.form__field:focus {
-  ~ .form__label {
-    position: absolute;
-    top: 0;
-    display: block;
-    transition: 0.2s;
-    font-size: 1rem;
-    color: $primary;
-    font-weight: 700;
-  }
-  padding-bottom: 6px;
-  font-weight: 700;
-  border-width: 3px;
-  border-image: linear-gradient(to right, $primary, $secondary);
-  border-image-slice: 1;
-}
-/* reset input */
-.form__field {
-  &:required,
-  &:invalid {
-    box-shadow: none;
-  }
-}
-
-.country-container {
-  overflow: hidden;
-  margin-top: 0;
-  margin-bottom: 0;
-}
 
 .item-container {
-  margin-bottom: 10px;
   .item-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   }
 }
 
-.filter {
+.item-wrapper {
   margin: 10px;
   margin-left: 0;
-  text-align: center;
-  .filter-wrapper {
+  .item {
     height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin: 0 auto;
   }
 }
 
@@ -107,7 +29,7 @@ $gray: #9b9b9b;
 }
 
 .active-filters {
-  padding-bottom: 10px;
+  padding-bottom: 0;
   .active-filter {
     display: inline-flex;
     flex-direction: row;
@@ -159,9 +81,10 @@ $gray: #9b9b9b;
 
 .country-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  padding: 5px;
   .country {
-    margin: 10px;
+    margin: 5px;
     text-align: center;
     img {
       width: 120px;

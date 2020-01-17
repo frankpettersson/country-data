@@ -1,6 +1,22 @@
-$blue: #3391ff;
+$slight-border-radius: px;
+$card-border-radius: $slight-border-radius;
 
+$blue: #3391ff;
+$dark-overlay-color: rgba(255, 255, 255, 0.03);
+$light-overlay-color: rgba(0, 0, 0, 0.03);
+$dark-white: #e8e6e3;
+$dark-black: #1c1e1f;
+$dark-grey: #121212;
+$light-grey: #f3f3f0;
+$white: #fafaf0;
+$black: #1c1e1f;
+
+$overlay-color: $light-overlay-color;
+$card-color: white;
+$bg-color: $light-grey;
+$card-color: $white;
 $link-color: $blue;
+$text-color: $black;
 
 h1,
 h2,
@@ -20,6 +36,27 @@ a {
 
 body {
   margin: 0;
+  background-color: $bg-color;
+}
+
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+b,
+figcaption,
+label,
+input {
+  color: $text-color;
 }
 
 .h1,
@@ -51,12 +88,32 @@ body {
   font-size: 0.67em;
 }
 
-.card {
+.centered * {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.card,
+.card-first,
+.card-last,
+.card-first-last {
   position: relative;
   margin: 10px auto;
-  padding: 20px 20px;
-  border-radius: 2px;
+  padding: 10px 10px;
+  border-radius: $card-border-radius;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  background-color: $card-color;
+}
+
+.card-first {
+  margin: 0 auto 5px auto;
+}
+.card-last {
+  margin: 5px auto 0 auto;
+}
+
+.card-first-last {
+  margin: 0 auto;
 }
 
 .card-overlay {
@@ -67,6 +124,8 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
+  border-radius: $card-border-radius;
+  background-color: $overlay-color;
 }
 
 .grid {
@@ -80,5 +139,47 @@ body {
   main,
   footer {
     width: 70%;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  $overlay-color: $dark-overlay-color;
+  $bg-color: $dark-grey;
+  $text-color: $dark-white;
+  $card-color: $dark-black;
+
+  body {
+    background-color: $bg-color;
+  }
+
+  .h1,
+  .h2,
+  .h3,
+  .h4,
+  .h5,
+  .h6,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  b,
+  figcaption,
+  label,
+  input {
+    color: $text-color;
+  }
+
+  .card,
+  .card-first,
+  .card-last,
+  .card-first-last {
+    background-color: $card-color;
+  }
+
+  .card-overlay {
+    background-color: $overlay-color;
   }
 }

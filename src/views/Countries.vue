@@ -1,5 +1,5 @@
 <template lang="pug">
-  #countries
+  section
     countries
 </template>
 
