@@ -13,17 +13,34 @@ $card-color: $white;
 $link-color: $blue;
 $text-color: $black;
 
-.item-container {
-  .item-grid {
+input {
+  color: #333;
+  font-size: 1.2rem;
+  padding: 10px;
+  border-radius: 0.2rem;
+  background-color: rgb(255, 255, 255);
+  border: none;
+  display: block;
+  border-bottom: 0.3rem solid transparent;
+  transition: all 0.3s;
+}
+
+.filter-container {
+  .filter-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   }
 }
 
-.item-wrapper {
-  margin: 10px;
-  margin-left: 0;
-  .item {
+.filter-wrapper {
+  margin: 0 10px;
+  &:last-child {
+    margin-top: 10px;
+  }
+  .filter {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     height: 100%;
   }
 }
@@ -32,6 +49,7 @@ $text-color: $black;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(48px, 1fr));
   .filter-by-letter {
+    text-align: center;
     line-height: 48px;
     height: 48px;
     width: 48px;
@@ -87,28 +105,27 @@ $text-color: $black;
   }
 }
 
-.hidden {
-  display: none;
-}
-
 .country-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  padding: 5px;
+  padding: 10px;
+  grid-gap: 10px;
 
   .country {
-    margin: 5px;
+    margin: 0;
     text-align: center;
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     cursor: pointer;
 
     img {
-      width: 120px;
+      width: 130px;
       height: 100px;
       object-fit: contain;
     }
+
     figcaption {
-      font-size: small;
+      font-size: 12px;
+      line-height: 12px;
     }
 
     img,
@@ -135,83 +152,74 @@ $text-color: $black;
 
 .extended-country {
   display: grid;
-  grid-template-columns: 60% 40%;
-
   position: relative;
-  width: calc(90% - 20px);
+  width: 90%;
+  margin: 20px auto;
   margin-top: 20px;
   margin-bottom: 20px;
   box-shadow: 0 1px 20px rgba(0, 0, 0, 0.12), 0 1px 20px rgba(0, 0, 0, 0.24);
+  grid-template-areas:
+    'name name name'
+    'flag region capital'
+    'flag subregion demonym'
+    'native alternative coordinates'
+    'languages alternative timezones'
+    'translations border currencies'
+    'translations border area';
 
-  .ec-header,
-  .ec-sidebar,
-  .ec-main {
+  .ec {
     margin: 5px;
-    width: calc(100% - 30px);
+    width: calc(100% - 10px);
   }
 
   .ec-name {
-    grid-column: 1 / 3;
-    grid-row: 1 / 2;
-  }
-  .ec-region {
-    grid-column: 1 / 2;
-    grid-row: 2 / 3;
-  }
-  .ec-subregion {
-    grid-column: 1 / 2;
-    grid-row: 3 / 4;
-  }
-  .ec-coordinates {
-    grid-column: 1 / 2;
-    grid-row: 4 / 5;
-  }
-  .ec-demonym {
-    grid-column: 1 / 2;
-    grid-row: 5 / 6;
-  }
-  .ec-area {
-    grid-column: 1 / 2;
-    grid-row: 6 / 7;
-  }
-  .ec-bordering {
-    grid-column: 1 / 2;
-    grid-row: 7 / 8;
-  }
-  .ec-currencies {
-    grid-column: 1 / 2;
-    grid-row: 8 / 9;
-  }
-  .ec-figure {
-    figure {
-      margin: 0;
-    }
-    grid-column: 2 / 3;
-    grid-row: 2 / 3;
+    grid-area: name;
   }
   .ec-native-name {
-    grid-column: 2 / 3;
-    grid-row: 3 / 4;
+    grid-area: native;
   }
   .ec-alternative-spellings {
-    grid-column: 2 / 3;
-    grid-row: 4 / 5;
-  }
-  .ec-capital {
-    grid-column: 2 / 3;
-    grid-row: 5 / 6;
-  }
-  .ec-timezones {
-    grid-column: 2 / 3;
-    grid-row: 6 / 7;
-  }
-  .ec-languages {
-    grid-column: 2 / 3;
-    grid-row: 7 / 8;
+    grid-area: alternative;
   }
   .ec-translations {
-    grid-column: 2 / 3;
-    grid-row: 8 / 9;
+    grid-area: translations;
+  }
+  .ec-region {
+    grid-area: region;
+  }
+  .ec-subregion {
+    grid-area: subregion;
+  }
+  .ec-capital {
+    grid-area: capital;
+  }
+  .ec-coordinates {
+    grid-area: coordinates;
+  }
+  .ec-demonym {
+    grid-area: demonym;
+  }
+  .ec-area {
+    grid-area: area;
+  }
+  .ec-bordering {
+    grid-area: border;
+  }
+  .ec-currencies {
+    grid-area: currencies;
+  }
+  .ec-img {
+    grid-area: flag;
+    img {
+      height: 100px;
+      object-fit: contain;
+    }
+  }
+  .ec-timezones {
+    grid-area: timezones;
+  }
+  .ec-languages {
+    grid-area: languages;
   }
 }
 
@@ -256,11 +264,27 @@ $text-color: $black;
 }
 
 @media only screen and (min-width: 700px) {
-  .country-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  .filter-wrapper {
+    &:first-child {
+      margin-right: 10px;
+      margin-left: 0;
+    }
+    &:last-child {
+      margin-top: 0;
+      margin-right: 0;
+    }
+  }
+  .country-initial-filter {
+    grid-template-columns: repeat(auto-fill, minmax(24px, 1fr));
+    .filter-by-letter {
+      line-height: 24px;
+      height: 24px;
+      width: 24px;
+    }
   }
   .extended-country {
+    margin-top: 40px;
+    margin-bottom: 40px;
     width: calc(60% - 20px);
   }
 }

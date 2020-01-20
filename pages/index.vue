@@ -1,18 +1,22 @@
 <template lang="pug">
   #app
+    header.card
+      Heading
     main.card
-      countries
+      Countries
 </template>
 
 <script>
-import countries from '@/components/countries.vue'
+import Heading from '~/components/heading.vue';
+import Countries from '~/components/countries.vue';
 export default {
   components: {
-    countries
+    Heading,
+    Countries
   }
-}
+};
 </script>
 
 <style lang="scss">
-@import '@/assets/style/main', '@/assets/style/fonts';
+@import '~/assets/style/main', '~/assets/style/fonts';
 </style>

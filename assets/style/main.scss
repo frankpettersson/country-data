@@ -96,6 +96,7 @@ input {
 .card-first,
 .card-last,
 .card-first-last {
+  box-sizing: border-box;
   position: relative;
   margin: 10px;
   padding: 10px 10px;
