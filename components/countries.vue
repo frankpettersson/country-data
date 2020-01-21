@@ -22,7 +22,7 @@
         figcaption.rmM {{ country.name }}
         .card-overlay
       .card-overlay
-    .card-last.pages
+    //.card-last.pages
       p.rmM << < 0 1 2 3 4 > >> 
       .card-overlay
     .extended-country-wrapper(v-show="showExtendedInfo === true")
@@ -197,26 +197,25 @@ export default {
   },
   computed: {
     filteredCountries() {
-      return this.allCountries
-        .filter(country => {
-          if (this.letterFilter.length > 0) {
-            if (
-              country.name
-                .toLowerCase()
-                .includes(this.searchCountry.toLowerCase()) &&
-              this.letterFilter.includes(country.name.substring(0, 1))
-            ) {
-              return true;
-            } else {
-              return false;
-            }
-          } else {
-            return country.name
+      return this.allCountries.filter(country => {
+        if (this.letterFilter.length > 0) {
+          if (
+            country.name
               .toLowerCase()
-              .includes(this.searchCountry.toLowerCase());
+              .includes(this.searchCountry.toLowerCase()) &&
+            this.letterFilter.includes(country.name.substring(0, 1))
+          ) {
+            return true;
+          } else {
+            return false;
           }
-        })
-        .splice(this.countriesFrom, this.countriesTo);
+        } else {
+          return country.name
+            .toLowerCase()
+            .includes(this.searchCountry.toLowerCase());
+        }
+      });
+      //.splice(this.countriesFrom, this.countriesTo);
     },
     countryInitials() {
       return this.allCountries
