@@ -1,13 +1,13 @@
 $slight-border-radius: 2px;
 $card-border-radius: $slight-border-radius;
 
-$dark-overlay-color: rgba(255, 255, 255, 0.03);
+$dark-overlay-color: rgba(255, 255, 255, 0.05);
 $dark-white: #e8e6e3;
-$dark-black: #1c1e1f;
+$dark-black: #121212e1;
 $dark-grey: #121212;
 $light-overlay-color: rgba(0, 0, 0, 0.03);
 $light-grey: #f3f3f0;
-$white: #fafaf0;
+$white: #ffffffe1;
 $black: #1c1e1f;
 $blue: #3391ff;
 
@@ -16,6 +16,32 @@ $bg-color: $light-grey;
 $card-color: $white;
 $link-color: $blue;
 $text-color: $black;
+
+html,
+body,
+#__nuxt,
+#__layout,
+#app {
+  min-height: 100%;
+  box-sizing: border-box;
+}
+
+#app {
+  padding: 10px;
+  position: relative;
+}
+
+header {
+  grid-area: header;
+}
+
+main {
+  min-height: 78vh;
+}
+
+footer {
+  grid-area: footer;
+}
 
 h1,
 h2,
@@ -98,7 +124,7 @@ input {
 .card-first-last {
   box-sizing: border-box;
   position: relative;
-  margin: 10px;
+  margin: 10px 0;
   padding: 10px 10px;
   border-radius: $card-border-radius;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
@@ -106,10 +132,10 @@ input {
 }
 
 .card-first {
-  margin: 0 auto 5px auto;
+  margin: 0 auto 10px auto;
 }
 .card-last {
-  margin: 5px auto 0 auto;
+  margin: 10px auto 0 auto;
 }
 
 .card-first-last {
@@ -142,10 +168,10 @@ input {
   }
 
   .card-first {
-    margin: 0 auto 5px auto;
+    margin: 0 auto 10px auto;
   }
   .card-last {
-    margin: 5px auto 0 auto;
+    margin: 10px auto 0 auto;
   }
 
   .card-first-last {

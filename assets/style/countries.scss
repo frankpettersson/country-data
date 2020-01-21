@@ -13,6 +13,10 @@ $card-color: $white;
 $link-color: $blue;
 $text-color: $black;
 
+.countries-container {
+  position: relative;
+}
+
 input {
   color: #333;
   font-size: 1.2rem;
@@ -21,7 +25,7 @@ input {
   background-color: rgb(255, 255, 255);
   border: none;
   display: block;
-  border-bottom: 0.3rem solid transparent;
+  border: 1px solid #ccc;
   transition: all 0.3s;
 }
 
@@ -60,6 +64,7 @@ input {
 
 .active-filters {
   padding-bottom: 0;
+  margin: 10px auto 0 auto;
   .active-filter {
     display: inline-flex;
     flex-direction: row;
@@ -112,20 +117,27 @@ input {
   grid-gap: 10px;
 
   .country {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     margin: 0;
     text-align: center;
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    height: 130px;
+    overflow: hidden;
     cursor: pointer;
 
     img {
-      width: 130px;
-      height: 100px;
+      margin: 0 auto;
+      max-width: 130px;
+      max-height: 90px;
       object-fit: contain;
     }
 
     figcaption {
       font-size: 12px;
       line-height: 12px;
+      margin-top: 2px;
     }
 
     img,
@@ -140,6 +152,9 @@ input {
   }
 }
 
+.pages {
+}
+
 .extended-country-wrapper {
   position: fixed;
   width: 100%;
@@ -147,6 +162,7 @@ input {
   top: 0;
   left: 0;
   overflow-y: scroll;
+  z-index: 20;
   background-color: rgba(0, 0, 0, 0.3);
 }
 
@@ -157,15 +173,18 @@ input {
   margin: 20px auto;
   margin-top: 20px;
   margin-bottom: 20px;
+  padding: 5px;
   box-shadow: 0 1px 20px rgba(0, 0, 0, 0.12), 0 1px 20px rgba(0, 0, 0, 0.24);
   grid-template-areas:
-    'name name name'
-    'flag region capital'
-    'flag subregion demonym'
-    'native alternative coordinates'
-    'languages alternative timezones'
-    'translations border currencies'
-    'translations border area';
+    'title title'
+    'flag flag'
+    'region subregion'
+    'capital native'
+    'demonym currencies'
+    'alternative languages'
+    'translations translations'
+    'border area'
+    'border timezones';
 
   .ec {
     margin: 5px;
@@ -173,7 +192,7 @@ input {
   }
 
   .ec-name {
-    grid-area: name;
+    grid-area: title;
   }
   .ec-native-name {
     grid-area: native;
@@ -210,8 +229,11 @@ input {
   }
   .ec-img {
     grid-area: flag;
+
     img {
-      height: 100px;
+      margin: 0 auto;
+      max-width: 250px;
+      max-height: 170px;
       object-fit: contain;
     }
   }
@@ -255,11 +277,43 @@ input {
     transform: rotate(-45deg);
   }
   &:hover {
-    background: darken($white, 5%);
+    background: #e6e5e3;
     &::before,
     &::after {
       background: darken($black, 30%);
     }
+  }
+}
+
+@media only screen and (min-width: 800px) {
+  .extended-country {
+    grid-template-areas:
+      'title title'
+      'flag region'
+      'flag subregion'
+      'capital native'
+      'demonym currencies'
+      'alternative languages'
+      'translations translations'
+      'border area'
+      'border timezones';
+  }
+}
+
+@media only screen and (min-width: 1100px) {
+  .extended-country-wrapper {
+    overflow-y: visible;
+  }
+  .extended-country {
+    grid-template-areas:
+      'title title title'
+      'flag region capital'
+      'flag subregion demonym'
+      'native timezones languages'
+      'alternative timezones border'
+      'alternative area border'
+      'translations translations currencies'
+      'translations translations currencies';
   }
 }
 

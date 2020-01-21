@@ -1,12 +1,12 @@
 <template lang="pug">
     .card-first-last
-        h1.rmR Country Data
+        h1.rmR Footer
         .card-overlay
 </template>
 
 <script>
 export default {
-  name: 'Heading'
+  name: 'Footer'
 };
 </script>
 
