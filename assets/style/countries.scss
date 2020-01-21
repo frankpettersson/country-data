@@ -29,6 +29,11 @@ input {
   transition: all 0.3s;
 }
 
+label {
+  position: absolute;
+  visibility: hidden;
+}
+
 .filter-container {
   .filter-grid {
     display: grid;
@@ -150,9 +155,6 @@ input {
         0 10px 10px rgba(0, 0, 0, 0.22);
     }
   }
-}
-
-.pages {
 }
 
 .extended-country-wrapper {

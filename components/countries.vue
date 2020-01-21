@@ -5,6 +5,7 @@
         .filter-wrapper
           .filter
             input.rmR(type="input" v-model="searchCountry" placeholder="Search for country" name="searchCountry" id='search-country')
+            label(for="search-country") Search
         .filter-wrapper
           .filter
             .country-initial-filter
@@ -17,7 +18,7 @@
       .card-overlay
     .card.country-grid
       figure.card.country(v-for="country in filteredCountries" @click="extendInformation(country)")
-        img(:src="country.flag" :alt="country.name" loading="lazy")
+        img(:src="country.flag" :alt="country.name" width="130px" height="90px" loading="lazy")
         figcaption.rmM {{ country.name }}
         .card-overlay
       .card-overlay
