@@ -40,9 +40,6 @@ export default {
   workbox: {
     dev: true
   },
-  modifyUrlPrefix: {
-    '/': '/_nuxt/'
-  },
   manifest: {
     name: 'Country Data',
     lang: 'en'
