@@ -16,8 +16,8 @@ export default {
   loading: { color: '#fff' },
   css: [],
   plugins: [],
-  buildModules: ['@nuxt/typescript-build'],
-  modules: ['@nuxtjs/axios', ['@nuxtjs/pwa', { icon: false }]],
+  buildModules: [['@nuxt/typescript-build', { typeCheck: false }]],
+  modules: ['@nuxtjs/axios', '@nuxtjs/pwa'],
   axios: {},
   typescript: {
     typeCheck: {
