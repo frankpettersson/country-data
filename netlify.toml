@@ -1,7 +1,0 @@
-[[headers]]
-  for = "/*"
-  [headers.values]
-    X-Robots-Tag = "googlebot": "nofollow"
-    X-Robots-Tag = "otherbot": "noindex", "nofollow"
-    X-XSS-Protection = "1; mode=block"
-    Referrer-Policy = "same-origin"
