@@ -4,8 +4,8 @@
       .filter-grid
         .filter-wrapper
           .filter
-            input.rmR(type="input" v-model="searchCountry" placeholder="Search" name="searchCountry" id='search-country')
-            label(for="search-country") Search
+            label.rmR(for="search-country") Search
+            input.rmR(type="input" v-model="searchCountry" name="searchCountry" id='search-country')
         .filter-wrapper
           .filter
             .country-initial-filter
@@ -224,5 +224,4 @@ export default Vue.extend({
 
 <style lang="scss" scoped>
 @import '@/assets/style/countries.scss';
-@import '@/assets/style/search.scss';
 </style>

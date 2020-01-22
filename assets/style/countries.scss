@@ -17,21 +17,33 @@ $text-color: $black;
   position: relative;
 }
 
+label,
 input {
   color: #333;
   font-size: 1.2rem;
-  padding: 10px;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+label {
+  cursor: text;
+  padding: 20px;
+  user-select: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.filter:focus-within {
+  label {
+    color: transparent;
+  }
+}
+input {
   border-radius: 0.2rem;
   background-color: rgb(255, 255, 255);
   border: none;
   display: block;
+  padding: 10px;
   border: 1px solid #ccc;
-  transition: all 0.3s;
-}
-
-label {
-  position: absolute;
-  visibility: hidden;
 }
 
 .filter-container {
