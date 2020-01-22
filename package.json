@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Responsive information about countries",
   "author": "Frank Pettersson",
-  "private": false,
+  "private": true,
   "scripts": {
     "dev": "nuxt-ts",
     "build": "nuxt-ts build",

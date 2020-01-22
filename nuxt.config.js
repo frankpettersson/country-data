@@ -1,7 +1,7 @@
 export default {
   mode: 'universal',
   head: {
-    title: process.env.npm_package_name || '',
+    title: process.env.npm_package_name || 'Country Data',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -9,7 +9,8 @@ export default {
         hid: 'description',
         name: 'description',
         content: process.env.npm_package_description || ''
-      }
+      },
+      { name: 'robots', content: 'index' }
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
@@ -19,6 +20,12 @@ export default {
   buildModules: [['@nuxt/typescript-build', { typeCheck: false }]],
   modules: ['@nuxtjs/axios', '@nuxtjs/pwa'],
   axios: {},
+  workbox: {
+    dev: true
+  },
+  modifyUrlPrefix: {
+    '/': '/_nuxt/'
+  },
   typescript: {
     typeCheck: {
       eslint: true
