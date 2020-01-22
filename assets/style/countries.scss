@@ -17,53 +17,71 @@ $text-color: $black;
   position: relative;
 }
 
-label,
-input {
-  color: #333;
-  font-size: 1.2rem;
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
+.search {
+  label,
+  input {
+    color: #333;
+    font-size: 1.2rem;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  }
 
-label {
-  cursor: text;
-  padding: 20px;
-  user-select: none;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-.filter:focus-within {
   label {
-    color: transparent;
+    cursor: text;
+    user-select: none;
+    position: absolute;
+    padding: 20px;
+    top: 0;
+    left: 0;
+    z-index: 16;
   }
-}
-input {
-  border-radius: 0.2rem;
-  background-color: rgb(255, 255, 255);
-  border: none;
-  display: block;
-  padding: 10px;
-  border: 1px solid #ccc;
+
+  input {
+    border-radius: 0.2rem;
+    background-color: #ffffff;
+    border: none;
+    display: block;
+    padding: 10px;
+    border: 1px solid #ccc;
+    z-index: 15;
+
+    &:valid {
+      z-index: 17;
+    }
+  }
+
+  &:focus-within {
+    label {
+      color: transparent;
+    }
+  }
 }
 
-.filter-container {
-  .filter-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  }
+.filter-grid {
+  display: grid;
+  grid-template-areas:
+    'search'
+    'initials';
 }
 
-.filter-wrapper {
-  margin: 0 10px;
-  &:last-child {
-    margin-top: 10px;
-  }
-  .filter {
+.search-wrapper,
+.initials-wrapper {
+  margin: 0;
+  .search,
+  .initials {
     display: flex;
     flex-direction: column;
     justify-content: center;
     height: 100%;
   }
+}
+
+.search-wrapper {
+  grid-area: search;
+}
+
+.initials-wrapper {
+  grid-area: initials;
+  margin-top: 10px;
 }
 
 .country-initial-filter {
@@ -148,6 +166,7 @@ input {
       margin: 0 auto;
       max-width: 130px;
       max-height: 90px;
+      z-index: 15;
       object-fit: contain;
     }
 
@@ -243,6 +262,9 @@ input {
   }
   .ec-img {
     grid-area: flag;
+    z-index: 25;
+    padding: 0;
+    text-align: center;
 
     img {
       margin: 0 auto;
@@ -299,6 +321,22 @@ input {
   }
 }
 
+@media only screen and (min-width: 700px) {
+  .country-initial-filter {
+    grid-template-columns: repeat(auto-fill, minmax(24px, 1fr));
+    .filter-by-letter {
+      line-height: 24px;
+      height: 24px;
+      width: 24px;
+    }
+  }
+  .extended-country {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    width: calc(60% - 20px);
+  }
+}
+
 @media only screen and (min-width: 800px) {
   .extended-country {
     grid-template-areas:
@@ -331,29 +369,19 @@ input {
   }
 }
 
-@media only screen and (min-width: 700px) {
-  .filter-wrapper {
-    &:first-child {
-      margin-right: 10px;
-      margin-left: 0;
-    }
-    &:last-child {
-      margin-top: 0;
-      margin-right: 0;
-    }
+@media only screen and (min-width: 1410px) {
+  .filter-grid {
+    display: grid;
+    grid-template-areas: 'search initials';
   }
-  .country-initial-filter {
-    grid-template-columns: repeat(auto-fill, minmax(24px, 1fr));
-    .filter-by-letter {
-      line-height: 24px;
-      height: 24px;
-      width: 24px;
-    }
+  .initials-wrapper {
+    margin-top: 0;
+    margin-left: 10px;
   }
-  .extended-country {
-    margin-top: 40px;
-    margin-bottom: 40px;
-    width: calc(60% - 20px);
+  .search {
+    label {
+      padding: 21px;
+    }
   }
 }
 

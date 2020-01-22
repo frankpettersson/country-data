@@ -1,28 +1,28 @@
 <template lang="pug">
   .countries-container
-    .card-first.filter-container
-      .filter-grid
-        .filter-wrapper
-          .filter
+    .filter-container
+      .card-first.filter-grid
+        .search-wrapper
+          .search
             label.rmR(for="search-country") Search
-            input.rmR(type="input" v-model="searchCountry" name="searchCountry" id='search-country')
-        .filter-wrapper
-          .filter
+            input.rmR(type="input" v-model="searchCountry" name="searchCountry" id='search-country' required)
+        .initials-wrapper
+          .initials
             .country-initial-filter
               a.filter-by-letter.rmM(role="button" v-for="initial in countryInitials" @click="addFilter") {{ initial }}
+        .card-overlay
       .card-last.active-filters(v-if="showActiveFilters")
         a.active-filter(role="button" v-for="filter in letterFilter" @click="removeFilter")
           span.active-filter-text.rmR {{ filter }}
           span.active-filter-remove
         .card-overlay
-      .card-overlay
     .card.country-grid
-      figure.card.country(v-for="country in filteredCountries" @click="extendInformation(country)")
+      figure.card.country(role="button" v-for="country in filteredCountries" @click="extendInformation(country)")
         img(:src="country.flag" :alt="country.name" width="130px" height="90px" loading="lazy")
         figcaption.rmM {{ country.name }}
         .card-overlay
       .card-overlay
-    .extended-country-wrapper(v-show="showExtendedInfo === true")
+    .card-first-last.extended-country-wrapper(v-show="showExtendedInfo === true")
       .card.extended-country
         .exit-button(@click="collapseExtendedInfo")
         .card.ec.ec-header.ec-name
@@ -119,6 +119,7 @@
                   p {{ extendedCountry.translations.fa }}
           .card-overlay
         .card-overlay
+      .card-overlay
 </template>
 
 <script lang="ts">
