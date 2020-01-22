@@ -37,8 +37,10 @@ export default {
       }
     }
   },
-  manifest: {
-    name: 'Country Data',
-    lang: 'en'
+  workbox: {
+    manifest: {
+      name: 'Country Data',
+      lang: 'en'
+    }
   }
 };
