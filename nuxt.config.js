@@ -17,7 +17,7 @@ export default {
   css: [],
   plugins: [],
   buildModules: ['@nuxt/typescript-build'],
-  modules: ['@nuxtjs/axios', '@nuxtjs/pwa'],
+  modules: ['@nuxtjs/axios', ['@nuxtjs/pwa', { icon: false }]],
   axios: {},
   typescript: {
     typeCheck: {

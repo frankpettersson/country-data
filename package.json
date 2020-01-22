@@ -4,7 +4,6 @@
   "description": "Responsive information about countries",
   "author": "Frank Pettersson",
   "private": true,
-  "precommit": "npm run lint",
   "scripts": {
     "dev": "nuxt-ts",
     "build": "nuxt-ts build",
