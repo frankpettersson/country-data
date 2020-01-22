@@ -20,12 +20,6 @@ export default {
   buildModules: [['@nuxt/typescript-build', { typeCheck: false }]],
   modules: ['@nuxtjs/axios', '@nuxtjs/pwa'],
   axios: {},
-  workbox: {
-    dev: true
-  },
-  modifyUrlPrefix: {
-    '/': '/_nuxt/'
-  },
   typescript: {
     typeCheck: {
       eslint: true
