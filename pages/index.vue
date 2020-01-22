@@ -15,6 +15,7 @@
 import Heading from '~/components/heading.vue';
 import Footer from '~/components/footer.vue';
 import Countries from '~/components/countries.vue';
+
 export default {
   components: {
     Heading,
