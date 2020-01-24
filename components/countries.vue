@@ -16,7 +16,7 @@
           span.active-filter-text.rmR {{ filter }}
           span.active-filter-remove
         .card-overlay
-    .card.country-grid
+    .card-last.country-grid
       figure.card.country(role="button" v-for="country in filteredCountries" @click="extendInformation(country)")
         img(:src="country.flag" :alt="country.name" width="130px" height="90px" loading="lazy")
         figcaption.rmM {{ country.name }}
@@ -87,7 +87,7 @@
           hr
           p.rmR(v-for="language in extendedCountry.languages") {{ language.name }}
           .card-overlay
-        .card-last.ec.ec-translations
+        .card.ec.ec-translations
           p.rmM Name in other languages
           hr
           table.rmR
